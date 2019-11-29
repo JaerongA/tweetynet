@@ -27,12 +27,13 @@ VERSION = '0.2.0'
 LICENSE='BSD'
 
 REQUIRED = [
-    'vak', 'crowsetta>=2.1.0'
+    'torch', 'attrs'
 ]
 
 # What packages are optional?
 EXTRAS = {
-    'article': ['joblib', 'pandas', 'seaborn', 'jupyterlab'],
+    'tests': ['pytest'],
+    'article': ['vak', 'crowsetta>=2.1.0', 'joblib', 'pandas', 'seaborn', 'jupyterlab'],
 }
 
 # The rest you shouldn't have to touch too much :)
@@ -111,7 +112,8 @@ setup(
     packages=find_packages(where="src", exclude=('tests',)),
     package_dir={"": "src"},
     entry_points={
-        'vak.network': 'TweetyNet = tweetynet.model:TweetyNet',
+        'vak.models': 'TweetyNet = tweetynet:TweetyNet',
+        'vak.model_config_parsers': 'TweetyNet = tweetynet.config:parse',
         'crowsetta.format': 'yarden = gardner.yarden2annot'
     },
     install_requires=REQUIRED,
